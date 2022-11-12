@@ -44,7 +44,8 @@ echo "function resetfunc() {\n";
         echo "document.getElementById(\"".$item."total\").innerHTML = 0 + ' €';\n";
      }
      echo "document.getElementById(\"nocredit2\").innerHTML = 0  + ' €';\n";
- echo "document.getElementById(\"conso\").value = 0;\n";
+ echo "document.getElementById(\"conso\").value = 0;\n"; 
+ echo "ifcredit();";
  echo "};\n";
 echo "</script>\n";
 

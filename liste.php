@@ -32,21 +32,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true) {
 }?>
     <table id="123" class="blueTable tablenoFixHead">
         <thead>
-            <tr>
-                <th colspan="8">
-                    <div class="hamburger">
-                        <center>
-                            <input style="width:75%; height: 100%;" class="btn" id="addbutton1" type="button" name=""
-                                value="HISTORIQUE" />
-                        </center>
-                    </div>
-                </th>
-            </tr>
-
             <tr style="height:50px;">
                 <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" style="margin: 0;">
                     <th colspan="2">
-                        <input class="btn btn-outline-danger btnadd intable" id="searchfilter" type="submit"
+                        <input style="width:100%; height: 50px; text-align: center;"
+                            class="btn btn-outline-danger btnadd intable" id="searchfilter" type="submit"
                             name="addfilter" value="FILTRER" style="height:50px;" />
                     </th>
                     <th colspan="4">

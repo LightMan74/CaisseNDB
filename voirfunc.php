@@ -156,7 +156,7 @@ function modifinterventionupdate($AorM)
     }
     if ($AorM == "MODIFIERITEM") {
         $sql = "UPDATE `clients` SET `nom` = '$nom',`credit`='$credit' WHERE `id` = '$id'";
-        echo $sql;
+        //echo $sql;
     }//$sql = str_replace("'", "\'", $sql);
     if ($AorM == "ADDITEM") {
         $sql = "INSERT INTO `clients`(`idgcm`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `coordgps`, `telephone`, `email`, `remarque`, `adressefacturation`,`etatrappel`, `infosclient`, `etatcontrat`, `datecontrat`, `marquechaudiere`, `modelchaudiere`, `numerochaudiere`, `marquebruleur`, `modelbruleur`, `numerobruleur`, `marqueregulation`, `modelregulation`, `numeroregulation`, `energie`, `prefiltre`, `emetteurs`) VALUES ('$idgcm','$nom','$prenom','$adresse','$cp','$ville','$coordgps','$telephone','$email','$remarque','$adressefacturation','$etatrappel','$infosclient','$etatcontrat','$datecontrat','$marquechaudiere','$modelchaudiere','$numerochaudiere','$marquebruleur','$modelbruleur','$numerobruleur',' $marqueregulation','$modelregulation','$numeroregulation','$energie','$prefiltre','$emetteur')";
@@ -170,7 +170,10 @@ function modifinterventionupdate($AorM)
     } else {
         PopUpMsg("Error: " . mysqli_error($conn));
     }
-
+    $sqlogs = 'INSERT INTO `logs` (`user`, `action`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '")';
+    //echo '<br>';
+    //echo $sqlogs;
+    $ww = mysqli_query($conn, $sqlogs);
     mysqli_close($conn);
 
 
@@ -182,4 +185,7 @@ window.location.href = "liste.php?id=<?php echo $id; ?>";
 </script>
 <?php
 }
+
+
+
  ?>
