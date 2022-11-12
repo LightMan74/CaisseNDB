@@ -34,41 +34,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true) {
         <thead>
             <tr>
                 <th colspan="8">
-                    <div class="nav-fullscreen">
-                        <ul class="nav-fullscreen__items">
-                            <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post"
-                                style="margin: 0;">
-                                <input class="btn btn-outline-danger btncat" id="addbutton1" type="submit"
-                                    name="aprevoir" value="A PREVOIR" />
-                                <input class="btn btn-outline-danger btncat" id="addbutton" type="submit"
-                                    name="contratin" value="CONTRAT IN" />
-                                <input class="btn btn-outline-danger btncat" id="addbutton1" type="submit"
-                                    name="contratout" value="CONTRAT OUT" />
-                                <input class="btn btn-outline-danger btncat" id="addbutton1" type="submit" name="addc"
-                                    value="AJOUTER CLIENT" />
-                                <!-- <input class="btn btn-outline-danger btncat" id="addbutton1" type="submit" name=""
-                                    value="AJOUTER INTERVENTIONT" /> -->
-                                <?php echo 'Utillisateur : ' . htmlspecialchars($_SESSION["username"]); ?>
-                                <a href="./logout.php"><input class="btn btn-outline-danger btncat"
-                                        value="DECONNEXION"></a>
-                            </form>
-                        </ul>
-
-                    </div>
-                    <?php
-                    function menutext(){
-                        if($_POST["removefilter"]){return 'MENU';}
-                        else
-                        if($_SESSION["FILTRE-APREVOIR"] || $_POST["aprevoir"]){return 'MENU - A PREVOIR';}
-                        elseif($_SESSION["FILTRE-CONTRATIN"] || $_POST["contratin"] ){return 'MENU - CONTRAT IN';}
-                        elseif($_SESSION["FILTRE-CONTRATOUT"] || $_POST["contratout"]){return 'MENU - CONTRAT OUT';}
-                       else{return 'MENU';}
-                    }
-                    ?>
                     <div class="hamburger">
                         <center>
                             <input style="width:75%; height: 100%;" class="btn" id="addbutton1" type="button" name=""
-                                value="<?php echo menutext();?>" />
+                                value="HISTORIQUE" />
                         </center>
                     </div>
                 </th>

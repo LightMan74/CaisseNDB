@@ -33,7 +33,6 @@ if (isset($_POST['removefilter'])) {
 
 function loadclients()
 {
-    echo 'yes';
     global $countcopypersistant;
     $countfiltre = false;
     if ($_SESSION["FILTRE-NOM"] != "") {
@@ -69,8 +68,6 @@ function loadclients()
 
         $sql = "SELECT * FROM `clients` WHERE " . $wherecondition; //1 ORDER BY `idgcm` ASC";//"SELECT * FROM stock";
  
-echo $sql;
-
     if ($wherecondition != "1" . " " . "ORDER BY ID ASC") {
         $result = mysqli_query($conn, $sql);
     } else {
@@ -79,7 +76,7 @@ echo $sql;
     }
     //"SELECT * FROM stock";
     // echo $sql;
-    echo "</br>";
+    // echo "</br>";
 
     if (mysqli_num_rows($result) > 0) {
         ?>

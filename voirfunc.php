@@ -1,3 +1,15 @@
+<script type="text/javascript">
+function energiechange(el) {
+    var element = document.getElementById(el);
+    if (element.style.display = "none") {
+        element.style.display = "contents";
+    } else {
+        element.style.display = "none";
+    }
+
+}
+</script>
+</script>
 <?php
 //session_start();
 require_once "config.php";
@@ -23,13 +35,16 @@ function loadintervention()
     $_SESSION["FILTRE-ID"] = "";
 
     //echo $sql;
-echo "</br>";
+// echo "</br>";
 
     $result = mysqli_query($conn, $sql);
 
     //"SELECT * FROM stock";
 ?>
 <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
+
+    <input class="btn btn-warning" type="button" name="MODIFIER" value="MODIFIER" onClick="energiechange('trchange')">
+
     <?php
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -55,15 +70,22 @@ echo "</br>";
                 <th><?php echo $row["credit"] ?></th>
                 <th><?php echo $row["id"] ?></th>
             </tr>
+            <tr style="display:none" id="trchange">
+
+                <th>
+                    <input name="nom" class="element text medium" type="text" maxlength="255"
+                        value="<?php echo $row["nom"] ?>" placeholder="NOUVEAU NOM" title="NOUVEAU NOM" />
+                </th>
+
+                <th><input name="CREDITADD" class="element text medium" type="text" maxlength="255" value="0"
+                        placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" /></th>
+
+                <th><?php echo "ID" ?></th>
+            </tr>
         </tbody>
     </Table>
 
-
-    <br><br><br>
-
-
-
-    <?php include "itemliste.php"; ?>
+    <br><br>
 
     <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255"
         value="<?php echo $id; ?>" />
@@ -78,6 +100,9 @@ echo 'AJOUTER';
 } else {
 echo 'PAYER CONSOMATIONS';
 } ?>" type="submit">
+
+    <?php include "itemliste.php"; ?>
+
 </form>
 <?php    
 }
@@ -108,20 +133,20 @@ function modifinterventionupdate($AorM)
     getUpperPost();
 
     $id = $_POST["ID"];
-    // $nom = str_replace("'", "\'", $_POST["nom"]);
-    // $nom = trim($nom);
+    $nom = str_replace("'", "\'", $_POST["nom"]);
+    $nom = trim($nom);
 
-    // if ($nom == "") {
-    //     PopUpMsg("INDIQUER AU MOINS UN NOM !");
-    //     exit ;
-    // }
-
+    if ($nom == "") {
+        PopUpMsg("INDIQUER AU MOINS UN NOM !");
+        exit ;
+    }
+    $creditadd = str_replace("'", "\'", $_POST["CREDITADD"]);
     $credit = str_replace("'", "\'", $_POST["CREDIT"]);
     echo  $credit;
     $conso = $_POST["conso"];
     echo  $conso;
-    $credit = $credit - $conso;
-echo  $credit;
+    $credit = $credit - $conso + $creditadd;
+    echo  $credit;
 
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
@@ -131,7 +156,7 @@ echo  $credit;
         PopUpMsg($msg);
     }
     if ($AorM == "MODIFIERITEM") {
-        $sql = "UPDATE `clients` SET `credit`='$credit' WHERE `id` = '$id'";
+        $sql = "UPDATE `clients` SET `nom` = '$nom',`credit`='$credit' WHERE `id` = '$id'";
         echo $sql;
     }//$sql = str_replace("'", "\'", $sql);
     if ($AorM == "ADDITEM") {
