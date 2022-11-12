@@ -29,11 +29,12 @@ foreach ($items as $item => $prix){
     }else{
         $cumulitem = $cumulitem ."+". $item ."*". $prix ;
     }
+
     echo "};\n";
  }
- echo "document.getElementById(\"total\").innerHTML = $cumulitem  + ' €';\n";
+ echo "document.getElementById(\"nocredit2\").innerHTML = $cumulitem  + ' €';\n";
  echo "document.getElementById(\"conso\").value = $cumulitem;\n";
-
+ echo "ifcredit()\n";
 echo "};\n";
 
 echo "function resetfunc() {\n";
@@ -42,14 +43,14 @@ echo "function resetfunc() {\n";
         echo "document.getElementById(\"$item\").innerHTML = 0;\n";
         echo "document.getElementById(\"".$item."total\").innerHTML = 0 + ' €';\n";
      }
-     echo "document.getElementById(\"total\").innerHTML = 0;\n";
+     echo "document.getElementById(\"nocredit2\").innerHTML = 0  + ' €';\n";
  echo "document.getElementById(\"conso\").value = 0;\n";
  echo "};\n";
 echo "</script>\n";
 
 
-
-echo "<p>Total general: <a id=\"total\" name=\"total\" value=\"0\">0 €</a></p>\n";
+echo "<p style=\"display:none\" id=\"nocredit\">PAS ASSEZ DE CREDIT</p>\n";
+echo "<p style=\"display:\" id=\"nocredit1\">Total general: <a id=\"nocredit2\" name=\"total\" value=\"0\">0 €</a></p>\n";
 echo "<input style=\"display:none\" id=\"conso\" name=\"conso\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"0\" />\n";
 
 echo "<br><br>";
@@ -66,36 +67,37 @@ echo "<input class=\"btn btn-danger\" type=\"button\" onClick=\"resetfunc();\" v
 
 
 ?>
+<script>
+function ifcredit() {
+    console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
+        .value) < parseFloat(document
+        .getElementById("conso").value));
+    console.log(document.getElementById("creditin").value);
+    console.log(document.getElementById("creditadd").value);
+    console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
+        .value));
+    console.log(document.getElementById("conso").value);
+    if (parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
+            .value) < parseFloat(document
+            .getElementById("conso").value)) {
+        consochangeon();
+    } else {
+        consochangeoff();
+    }
 
-<!-- <script>
-var bierre = 0;
-var coca = 0;
+    function consochangeon() {
+        var element = document.getElementById('creditbtn');
+        var element2 = document.getElementById('nocredit');
+        element.style.display = "none";
+        element2.style.display = "";
 
-function onClick(item) {
-    bierre += 1;
-    document.getElementById("bierre").innerHTML = bierre;
-    document.getElementById("bierretotal").innerHTML = bierre * 2.5;
-    coca += 1;
-    document.getElementById("coca").innerHTML = coca;
-    document.getElementById("cocatotal").innerHTML = coca * 2;
+    }
 
-
-
-    document.getElementById("total").innerHTML = coca * 2 + bierre * 2.5;
-    document.getElementById("conso").value = coca * 2 + bierre * 2.5;
-};
+    function consochangeoff() {
+        var element = document.getElementById('creditbtn');
+        var element2 = document.getElementById('nocredit');
+        element.style.display = "";
+        element2.style.display = "none";
+    }
+}
 </script>
-
-<button type="button" onClick="onClick('bierre')">Bierre : 2€50</button>
-<p>Nbres: <a id="bierre">0</a></p>
-<p>Total: <a id="bierretotal">0</a></p>
-
-
-<button type="button" onClick="onClick('coca')">coca : 2€00</button>
-<p>Nbres: <a id="coca">0</a></p>
-<p>Total: <a id="cocatotal">0</a></p>
-
-<p>Total general: <a id="total" name="total" value="0">0</a></p>
-<input style="display:none" id="conso" name="conso" class="element text medium" type="text" maxlength="255" value="0" />
-
--->

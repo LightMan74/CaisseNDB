@@ -77,8 +77,8 @@ function loadintervention()
                         value="<?php echo $row["nom"] ?>" placeholder="NOUVEAU NOM" title="NOUVEAU NOM" />
                 </th>
 
-                <th><input name="CREDITADD" class="element text medium" type="text" maxlength="255" value="0"
-                        placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" /></th>
+                <th><input id="creditadd" name="CREDITADD" class="element text medium" type="text" maxlength="255"
+                        value="0" placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" onchange="ifcredit()" /></th>
 
                 <th><?php echo "ID" ?></th>
             </tr>
@@ -86,12 +86,11 @@ function loadintervention()
     </Table>
 
     <br><br>
-
     <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255"
         value="<?php echo $id; ?>" />
-    <input style="display:none" id="element_6" name="CREDIT" class="element text medium" type="text" maxlength="255"
+    <input style="display:none" id="creditin" name="CREDIT" class="element text medium" type="text" maxlength="255"
         value="<?php echo $row["credit"]; ?>" />
-    <input class="btn btn-warning" name="<?php if (htmlspecialchars($_GET["addc"]) == "true") {
+    <input style="" id="creditbtn" class="btn btn-warning" name="<?php if (htmlspecialchars($_GET["addc"]) == "true") {
 echo 'ADDITEM';
 } else {
 echo 'MODIFIERITEM';
