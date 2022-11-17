@@ -251,6 +251,13 @@
 		height: 10%;
 	}
 
+	#btnitems {
+		width: 30%;
+		display: inline-block;
+		margin: 0 10 0 10;
+	}
+
+
 	.btn-warning {
 		color: #fff;
 		background-color: #f0ad4e;

@@ -1,10 +1,13 @@
 <script type="text/javascript">
-function energiechange(el) {
+function energiechange(el, el2) {
     var element = document.getElementById(el);
+    var element2 = document.getElementById(el2);
     if (element.style.display = "none") {
         element.style.display = "contents";
+        element2.style.display = "none";
     } else {
         element.style.display = "none";
+        element2.style.display = "";
     }
 
 }
@@ -43,7 +46,7 @@ function loadintervention()
 ?>
 <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
 
-    <input class="btn btn-warning" type="button" name="MODIFIER" value="MODIFIER" onClick="energiechange('trchange')">
+
 
     <?php
     if (mysqli_num_rows($result) > 0) {
@@ -85,7 +88,11 @@ function loadintervention()
         </tbody>
     </Table>
 
+    <input style="height:5%; font-size: 50%; display:" id="trchange2" class="btn btn-warning" type="button"
+        name="MODIFIER" value="MODIFIER" onClick="energiechange('trchange','trchange2')">
+
     <br><br>
+
     <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255"
         value="<?php echo $id; ?>" />
     <input style="display:none" id="creditin" name="CREDIT" class="element text medium" type="text" maxlength="255"
@@ -107,6 +114,46 @@ echo 'PAYER CONSOMATIONS';
 }
 }
 
+$sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
+//echo $sql;
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+
+<table id="searchtable" class="blueTable tableFixHead">
+    <thead>
+        <tr>
+            <th>
+                <font>TIME</font>
+            </th>
+            <th>
+                <font>CREDIT</font>
+            </th>
+            <th>
+                <font>AJOUT</font>
+            </th>
+            <th>
+                <font>CONSO</font>
+            </th>
+            <th>
+                <font>DETAILS</font>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><?php echo $row["timestamp"] ?></th>
+            <th><?php echo $row["credit"] ?></th>
+            <th><?php echo $row["ajout"] ?></th>
+            <th><?php echo $row["conso"] ?></th>
+            <th><?php echo $row["details"] ?></th>
+        </tr>
+    </tbody>
+</Table>
+<?php
+    }
+}
 ?>
 <?php  
 }
@@ -141,11 +188,15 @@ function modifinterventionupdate($AorM)
     }
     $creditadd = str_replace("'", "\'", $_POST["CREDITADD"]);
     $credit = str_replace("'", "\'", $_POST["CREDIT"]);
-    echo  $credit;
+    echo  $credit . "\n";
     $conso = $_POST["conso"];
-    echo  $conso;
+    echo  $conso . "\n";
     $credit = $credit - $conso + $creditadd;
-    echo  $credit;
+    echo  $credit . "\n";
+    $creditadd  = str_replace("'", "\'", $_POST["CREDITADD"]);
+echo $creditadd . "\n";
+    $detailsitems = str_replace("'", "\'", $_POST["detailsitems"]);
+echo $detailsitems . "\n";
 
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
@@ -170,7 +221,7 @@ function modifinterventionupdate($AorM)
     } else {
         PopUpMsg("Error: " . mysqli_error($conn));
     }
-    $sqlogs = 'INSERT INTO `logs` (`user`, `action`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '")';
+    $sqlogs = 'INSERT INTO `logs` (`user`, `action`, `details`,`credit`, `ajout`, `conso`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '","' . $detailsitems . '","' . $credit . '","' . $creditadd . '","' . $conso .'")';
     //echo '<br>';
     //echo $sqlogs;
     $ww = mysqli_query($conn, $sqlogs);

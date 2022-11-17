@@ -6,14 +6,18 @@ $items = array(
 "Cafe" => "1.50",
 "pate" => "4.00",
 "crepe" => "2.00",
-"limonade" => "2.00",
-"pizza" => "2.50",
+"Bierre1" => "2.50",
+"Coca1" => "2.00",
+"Cafe1" => "1.50",
+"pate1" => "4.00",
+"crepe1" => "2.00",
 );
 
 $cumulitem;
 $first = true;
 
 echo "<script>\n";
+echo "var detailsitemtext = '';\n";
 foreach ($items as $item => $prix){
 echo "var $item = 0;\n";
 }
@@ -32,7 +36,22 @@ foreach ($items as $item => $prix){
 
     echo "};\n";
  }
+ echo "detailsitemtext = ";
+ $first = true;
+ foreach ($items as $item => $prix){
+    //echo " + '$item --> ' + $item + ' / '";
+    if ($first){
+        echo "'$item : $prix € --> ' + $item + ' / '";
+        $first = false;
+    }else{
+        echo " + '$item : $prix € --> ' + $item + ' / '";
+    }
+
+    }
+echo ";\n";
+
  echo "document.getElementById(\"nocredit2\").innerHTML = $cumulitem  + ' €';\n";
+
  echo "document.getElementById(\"conso\").value = $cumulitem;\n";
  echo "ifcredit()\n";
 echo "};\n";
@@ -52,18 +71,22 @@ echo "</script>\n";
 
 echo "<p style=\"display:none\" id=\"nocredit\">PAS ASSEZ DE CREDIT</p>\n";
 echo "<p style=\"display:\" id=\"nocredit1\">Total general: <a id=\"nocredit2\" name=\"total\" value=\"0\">0 €</a></p>\n";
+echo "<input style=\"display:none\" id=\"detailsitems\" name=\"detailsitems\" class=\"element text medium\" type=\"text\" maxlength=\"500\" value=\"0\" />\n";
 echo "<input style=\"display:none\" id=\"conso\" name=\"conso\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"0\" />\n";
 
 echo "<br><br>";
 
 foreach ($items as $item => $prix){
-echo "<input class=\"btn btn-good\" type=\"button\" onClick=\"onClick('$item')\" value=\"$item : $prix €\">\n";
+echo "<div id=\"btnitems\">"; 
 echo "<p>Nbres: <a id=\"$item\">0</a></p>\n";
+echo "<input class=\"btn btn-good\" type=\"button\" onClick=\"onClick('$item')\" value=\"$item : $prix €\">\n";
+
 echo "<p>Total: <a id=\"".$item."total\">0 €</a></p>\n";
+echo "</div>";
 }
-
+echo "<br><br>";
 echo "<input class=\"btn btn-danger\" type=\"button\" onClick=\"resetfunc();\" value=\"RESET\">\n";
-
+echo "<br><br>";
 
 
 
@@ -78,6 +101,7 @@ function ifcredit() {
     console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
         .value));
     console.log(document.getElementById("conso").value);
+    console.log(document.getElementById("detailsitems").value = detailsitemtext);
     if (parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
             .value) < parseFloat(document
             .getElementById("conso").value)) {
