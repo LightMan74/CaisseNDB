@@ -118,9 +118,7 @@ $sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
 //echo $sql;
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-
+    ?>
 <table id="searchtable" class="blueTable tableFixHead">
     <thead>
         <tr>
@@ -140,7 +138,11 @@ if (mysqli_num_rows($result) > 0) {
                 <font>DETAILS</font>
             </th>
         </tr>
-    </thead>
+    </thead><?php
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+
+
     <tbody>
         <tr>
             <th><?php echo $row["timestamp"] ?></th>
@@ -150,9 +152,11 @@ if (mysqli_num_rows($result) > 0) {
             <th><?php echo $row["details"] ?></th>
         </tr>
     </tbody>
-</Table>
-<?php
+
+    <?php
     }
+   ?>
+</Table><?php
 }
 ?>
 <?php  

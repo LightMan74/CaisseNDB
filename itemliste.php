@@ -18,6 +18,7 @@ $first = true;
 
 echo "<script>\n";
 echo "var detailsitemtext = '';\n";
+echo "var countitems = 0;\n";
 foreach ($items as $item => $prix){
 echo "var $item = 0;\n";
 }
@@ -36,19 +37,27 @@ foreach ($items as $item => $prix){
 
     echo "};\n";
  }
- echo "detailsitemtext = ";
- $first = true;
- foreach ($items as $item => $prix){
-    //echo " + '$item --> ' + $item + ' / '";
-    if ($first){
-        echo "'$item : $prix € --> ' + $item + ' / '";
-        $first = false;
-    }else{
-        echo " + '$item : $prix € --> ' + $item + ' / '";
-    }
-
-    }
-echo ";\n";
+//  echo "detailsitemtext = ";
+//  $first = true;
+//  foreach ($items as $item => $prix){
+//     //echo " + '$item --> ' + $item + ' / '";
+//     if ($first){
+//         echo "'$item : $prix € --> ' + $item + ' / '";
+//         $first = false;
+//     }else{
+//         echo " + '$item : $prix € --> ' + $item + ' / '";
+//     }
+// }
+echo "detailsitemtext = '';\n";
+echo "countitems = 0;\n";
+foreach ($items as $item => $prix){
+echo "if ($item > 0){\n";
+echo "countitems += 1;\n";
+echo "detailsitemtext += ";
+echo "'$item : $prix € --> ' + $item + ' / '\n";
+echo "}\n";
+}
+echo "detailsitemtext = detailsitemtext.slice(0, -3);\n";
 
  echo "document.getElementById(\"nocredit2\").innerHTML = $cumulitem  + ' €';\n";
 
@@ -74,7 +83,7 @@ echo "<p style=\"display:\" id=\"nocredit1\">Total general: <a id=\"nocredit2\" 
 echo "<input style=\"display:none\" id=\"detailsitems\" name=\"detailsitems\" class=\"element text medium\" type=\"text\" maxlength=\"500\" value=\"0\" />\n";
 echo "<input style=\"display:none\" id=\"conso\" name=\"conso\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"0\" />\n";
 
-echo "<br><br>";
+echo "<br>";
 
 foreach ($items as $item => $prix){
 echo "<div id=\"btnitems\">"; 
@@ -125,4 +134,15 @@ function ifcredit() {
         element2.style.display = "none";
     }
 }
+
+String.prototype.removeCharAt = function(i) {
+    var tmp = this.split(''); // convert to an array
+    tmp.splice(i - 1, 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
+    return tmp.join(''); // reconstruct the string
+}
+
+function reverse(s) {
+    return s.split("").reverse().join("");
+}
+console.log("crt/r2002_2".slice(0, -4));
 </script>
