@@ -81,7 +81,7 @@ function loadintervention()
                 </th>
 
                 <th><input id="creditadd" name="CREDITADD" class="element text medium" type="text" maxlength="255"
-                        value="0" placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" onchange="ifcredit()" /></th>
+                        value="" placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" onchange="ifcredit()" /></th>
 
                 <th><?php echo "ID" ?></th>
             </tr>
@@ -110,15 +110,6 @@ echo 'PAYER CONSOMATIONS';
     <?php include "itemliste.php"; ?>
 
 </form>
-<?php    
-}
-}
-
-$sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
-//echo $sql;
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    ?>
 <table id="searchtable" class="blueTable tableFixHead">
     <thead>
         <tr>
@@ -138,7 +129,17 @@ if (mysqli_num_rows($result) > 0) {
                 <font>DETAILS</font>
             </th>
         </tr>
-    </thead><?php
+    </thead>
+    <?php    
+}
+}
+
+$sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
+//echo $sql;
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    ?>
+    <?php
     while ($row = mysqli_fetch_assoc($result)) {
         ?>
 
@@ -190,6 +191,9 @@ function modifinterventionupdate($AorM)
         PopUpMsg("INDIQUER AU MOINS UN NOM !");
         exit ;
     }
+    if (empty($_POST["CREDITADD"])){
+        $_POST["CREDITADD"] = "0";
+    }
     $creditadd = str_replace("'", "\'", $_POST["CREDITADD"]);
     $credit = str_replace("'", "\'", $_POST["CREDIT"]);
     echo  $credit . "\n";
@@ -197,7 +201,7 @@ function modifinterventionupdate($AorM)
     echo  $conso . "\n";
     $credit = $credit - $conso + $creditadd;
     echo  $credit . "\n";
-    $creditadd  = str_replace("'", "\'", $_POST["CREDITADD"]);
+    //$creditadd  = str_replace("'", "\'", $_POST["CREDITADD"]);
 echo $creditadd . "\n";
     $detailsitems = str_replace("'", "\'", $_POST["detailsitems"]);
 echo $detailsitems . "\n";

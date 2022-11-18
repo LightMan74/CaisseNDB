@@ -1,16 +1,15 @@
 <?php
 
 $items = array(
-"Bierre" => "2.50",
-"Coca" => "2.00",
-"Cafe" => "1.50",
-"pate" => "4.00",
-"crepe" => "2.00",
-"Bierre1" => "2.50",
-"Coca1" => "2.00",
-"Cafe1" => "1.50",
-"pate1" => "4.00",
-"crepe1" => "2.00",
+"Biere" => "2.50",
+"Soda" => "2.00",
+"Cafe" => "1.00",
+"Pates" => "5.00",
+"Crepe_Nutela" => "2.00",
+"Crepe_Sucrée" => "1.50",
+"Patisserie_2" => "2.00",
+"Patisserie_1" => "1.00",
+"Consigne" => "1.00"
 );
 
 $cumulitem;
@@ -87,10 +86,13 @@ echo "<br>";
 
 foreach ($items as $item => $prix){
 echo "<div id=\"btnitems\">"; 
-echo "<p>Nbres: <a id=\"$item\">0</a></p>\n";
-echo "<input class=\"btn btn-good\" type=\"button\" onClick=\"onClick('$item')\" value=\"$item : $prix €\">\n";
 
+echo "<p>Nbres: <a id=\"$item\">0</a></p>\n";
+
+echo "<input class=\"btn btn-good\" type=\"button\" onClick=\"onClick('$item')\" value=\"$item\n$prix €\">\n";
+ 
 echo "<p>Total: <a id=\"".$item."total\">0 €</a></p>\n";
+
 echo "</div>";
 }
 echo "<br><br>";
