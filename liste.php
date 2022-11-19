@@ -7,10 +7,10 @@
 <script type="text/javascript" src="CSS_JS/view.js"></script>
 
 <script type="text/javascript" src="CSS_JS/popup.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="CSS_JS/jquery.min.js"></script>
 
 <script type="text/javascript" src="CSS_JS/table.js"></script>
-<link rel="icon" type="image/png" sizes="32x32" href="https://lmbruleurs.fr/logo.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="CSS_JS/logo.ico">
 
 <link rel="stylesheet" href="CSS_JS/menu.css" />
 <script type="text/javascript" src="CSS_JS/menu.js"></script>

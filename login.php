@@ -13,7 +13,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
 }
 
 // Include config file
-require_once "configbis.php";
+//require_once "configbis.php";
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -48,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <title>GCMW.LMBRULEURS.FR</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <title>ALBINTON CAISSE NDB</title>
+    <link rel="stylesheet" href="CSS_JS/bootstrap.css">
     <style type="text/css">
     body {
         font: 14px sans-serif;
