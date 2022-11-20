@@ -104,17 +104,20 @@ echo "<br><br>";
 ?>
 <script>
 function ifcredit() {
-    console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
-        .value) < parseFloat(document
-        .getElementById("conso").value));
-    console.log(document.getElementById("creditin").value);
-    console.log(document.getElementById("creditadd").value);
-    console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
-        .value));
-    console.log(document.getElementById("conso").value);
-    console.log(document.getElementById("detailsitems").value = detailsitemtext);
-    if (parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
-            .value) < parseFloat(document
+    // console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
+    //     .value) < parseFloat(document
+    //     .getElementById("conso").value));
+    // console.log(document.getElementById("creditin").value);
+    // console.log(document.getElementById("creditadd").value);
+    // console.log(parseFloat(document.getElementById("creditin").value) + parseFloat(document.getElementById("creditadd")
+    //     .value));
+    // console.log(document.getElementById("conso").value);
+    // console.log(document.getElementById("detailsitems").value = detailsitemtext);
+    var creditaddnozero = parseFloat(document.getElementById("creditadd").value);
+    if (!creditaddnozero) {
+        creditaddnozero = 0;
+    }
+    if (parseFloat(document.getElementById("creditin").value) + creditaddnozero < parseFloat(document
             .getElementById("conso").value)) {
         consochangeon();
     } else {
@@ -137,14 +140,14 @@ function ifcredit() {
     }
 }
 
-String.prototype.removeCharAt = function(i) {
-    var tmp = this.split(''); // convert to an array
-    tmp.splice(i - 1, 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
-    return tmp.join(''); // reconstruct the string
-}
+// String.prototype.removeCharAt = function(i) {
+//     var tmp = this.split(''); // convert to an array
+//     tmp.splice(i - 1, 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
+//     return tmp.join(''); // reconstruct the string
+// }
 
-function reverse(s) {
-    return s.split("").reverse().join("");
-}
-console.log("crt/r2002_2".slice(0, -4));
+// function reverse(s) {
+//     return s.split("").reverse().join("");
+// }
+// console.log("crt/r2002_2".slice(0, -4));
 </script>
