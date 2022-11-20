@@ -44,7 +44,8 @@ function loadintervention()
 
     //"SELECT * FROM stock";
 ?>
-<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
+<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post"
+    onkeydown="return event.key != 'Enter';">
 
 
 
