@@ -217,9 +217,9 @@ echo $detailsitems . "\n";
         $sql = "UPDATE `clients` SET `nom` = '$nom',`credit`='$credit' WHERE `id` = '$id'";
         //echo $sql;
     }//$sql = str_replace("'", "\'", $sql);
-    if ($AorM == "ADDITEM") {
-        $sql = "INSERT INTO `clients`(`idgcm`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `coordgps`, `telephone`, `email`, `remarque`, `adressefacturation`,`etatrappel`, `infosclient`, `etatcontrat`, `datecontrat`, `marquechaudiere`, `modelchaudiere`, `numerochaudiere`, `marquebruleur`, `modelbruleur`, `numerobruleur`, `marqueregulation`, `modelregulation`, `numeroregulation`, `energie`, `prefiltre`, `emetteurs`) VALUES ('$idgcm','$nom','$prenom','$adresse','$cp','$ville','$coordgps','$telephone','$email','$remarque','$adressefacturation','$etatrappel','$infosclient','$etatcontrat','$datecontrat','$marquechaudiere','$modelchaudiere','$numerochaudiere','$marquebruleur','$modelbruleur','$numerobruleur',' $marqueregulation','$modelregulation','$numeroregulation','$energie','$prefiltre','$emetteur')";
-    }
+    // if ($AorM == "ADDITEM") {
+    //     $sql = "INSERT INTO `clients`(`idgcm`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `coordgps`, `telephone`, `email`, `remarque`, `adressefacturation`,`etatrappel`, `infosclient`, `etatcontrat`, `datecontrat`, `marquechaudiere`, `modelchaudiere`, `numerochaudiere`, `marquebruleur`, `modelbruleur`, `numerobruleur`, `marqueregulation`, `modelregulation`, `numeroregulation`, `energie`, `prefiltre`, `emetteurs`) VALUES ('$idgcm','$nom','$prenom','$adresse','$cp','$ville','$coordgps','$telephone','$email','$remarque','$adressefacturation','$etatrappel','$infosclient','$etatcontrat','$datecontrat','$marquechaudiere','$modelchaudiere','$numerochaudiere','$marquebruleur','$modelbruleur','$numerobruleur',' $marqueregulation','$modelregulation','$numeroregulation','$energie','$prefiltre','$emetteur')";
+    // }
     if (mysqli_query($conn, $sql)) {
         if ($AorM == "ADDITEM") {
             PopUpMsg("AJOUT EFFECTUER.");
