@@ -19,11 +19,11 @@ if (isset($_POST['addfilter'])) {
 } else {
     if (htmlspecialchars($_GET["nom"]) != "") {
         $_SESSION["FILTRE-NOM"] = htmlspecialchars($_GET["nom"]);
-    } 
+    }
 
     if (htmlspecialchars($_GET["id"]) != "") {
         $_SESSION["FILTRE-ID"]  = htmlspecialchars($_GET["id"]);
-}
+    }
 }
 
 if (isset($_POST['removefilter'])) {
@@ -52,13 +52,13 @@ function loadclients()
     if ($_SESSION["FILTRE-NOM"] == ""  && $_SESSION["FILTRE-ID"] == "") {
         $wherecondition = "1";
     }
-    
+
     //$_SESSION["FILTRE-ID"] = "";
 
     $wherecondition = $wherecondition . " " . "ORDER BY ID ASC";
     $wherecondition = str_replace("*", "%", $wherecondition);
-    
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);    
+
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
     if (!$conn) {
         $msg = "Connection failed: " . mysqli_connect_error();
@@ -66,8 +66,8 @@ function loadclients()
         PopUpMsg($msg);
     }
 
-        $sql = "SELECT * FROM `clients` WHERE " . $wherecondition; //1 ORDER BY `idgcm` ASC";//"SELECT * FROM stock";
- 
+    $sql = "SELECT * FROM `clients` WHERE " . $wherecondition; //1 ORDER BY `idgcm` ASC";//"SELECT * FROM stock";
+
     if ($wherecondition != "1" . " " . "ORDER BY ID ASC") {
         $result = mysqli_query($conn, $sql);
     } else {
@@ -105,8 +105,7 @@ function loadclients()
         <tr>
             <th>
                 <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
-                    <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>"
-                        style="display:none" />
+                    <input name="ID" type="text" maxlength="255" value="<?php echo $row["id"]; ?>" style="display:none" />
                     <input class="btn btn-warning" type="submit" name="viewitem" value="VOIR" />
                 </form>
             </th>
@@ -134,5 +133,6 @@ function loadclients()
     </tfoot>
 </table>
 <?php
-    }}
+    }
+}
 ?>
