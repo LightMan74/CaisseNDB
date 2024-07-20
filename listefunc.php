@@ -58,18 +58,18 @@ function loadclients()
     $wherecondition = $wherecondition . " " . "ORDER BY ID ASC";
     $wherecondition = str_replace("*", "%", $wherecondition);
 
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    // Check connection
-    if (!$conn) {
-        $msg = "Connection failed: " . mysqli_connect_error();
-        die($msg);
-        PopUpMsg($msg);
-    }
+    // dbconnect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // // Check connection
+    // if (!dbconnect) {
+    //     $msg = "Connection failed: " . mysqli_connect_error();
+    //     die($msg);
+    //     PopUpMsg($msg);
+    // }
 
     $sql = "SELECT * FROM `clients` WHERE " . $wherecondition; //1 ORDER BY `idgcm` ASC";//"SELECT * FROM stock";
 
     if ($wherecondition != "1" . " " . "ORDER BY ID ASC") {
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query(dbconnect, $sql);
     } else {
         echo "MODE MOBILE";
         echo "</br>";

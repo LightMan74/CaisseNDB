@@ -17,7 +17,7 @@
 
 <body>
     <?php
-
+include 'config.php';
 include "listefunc.php";
 
 ?>
@@ -26,8 +26,8 @@ include "listefunc.php";
 // if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true) {
 //?>
     <script type="text/javascript">
-        //     window.location.href = "login.php?id=<?php echo htmlspecialchars($_GET["id"]); ?>";
-        //     
+    //     window.location.href = "login.php?id=<?php echo htmlspecialchars($_GET["id"]); ?>";
+    //     
     </script>
     <?php
 // }?>
@@ -75,7 +75,9 @@ if ((isset($_POST['viewitem']) || $_SESSION["FILTRE-ID"] != "")) {
 ?>
 
 
-    <?php session_write_close(); ?>
+    <?php session_write_close();
+    mysqli_close(dbconnect) ;
+    ?>
 
 
 

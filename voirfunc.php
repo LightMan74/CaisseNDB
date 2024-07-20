@@ -1,21 +1,21 @@
 <script type="text/javascript">
-function energiechange(el, el2) {
-    var element = document.getElementById(el);
-    var element2 = document.getElementById(el2);
-    if (element.style.display = "none") {
-        element.style.display = "contents";
-        element2.style.display = "none";
-    } else {
-        element.style.display = "none";
-        element2.style.display = "";
-    }
+    function energiechange(el, el2) {
+        var element = document.getElementById(el);
+        var element2 = document.getElementById(el2);
+        if (element.style.display = "none") {
+            element.style.display = "contents";
+            element2.style.display = "none";
+        } else {
+            element.style.display = "none";
+            element2.style.display = "";
+        }
 
-}
+    }
 </script>
 </script>
 <?php
 //session_start();
-require_once "config.php";
+// require_once "config.php";
 $text;
 function loadintervention()
 {
@@ -25,34 +25,33 @@ function loadintervention()
     } else {
         $id = $_SESSION["FILTRE-ID"];
     }
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-    $conninter = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // dbconnect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // dbconnectinter = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
-    if (!$conn) {
-        $msg = "Connection failed: " . mysqli_connect_error();
-        die($msg);
-        PopUpMsg($msg);
-    }
+    // if (!dbconnect) {
+    //     $msg = "Connection failed: " . mysqli_connect_error();
+    //     die($msg);
+    //     PopUpMsg($msg);
+    // }
 
     $sql = "SELECT * FROM `clients` WHERE `id` = '" . $id . "'";
     $_SESSION["FILTRE-ID"] = "";
 
     //echo $sql;
-// echo "</br>";
+    // echo "</br>";
 
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query(dbconnect, $sql);
 
     //"SELECT * FROM stock";
-?>
-<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post"
-    onkeydown="return event.key != 'Enter';">
+    ?>
+<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post" onkeydown="return event.key != 'Enter';">
 
 
 
     <?php
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            ?>
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                ?>
 
     <table id="searchtable" class="blueTable tableFixHead">
         <thead>
@@ -77,36 +76,31 @@ function loadintervention()
             <tr style="display:none" id="trchange">
 
                 <th>
-                    <input name="nom" class="element text medium" type="text" maxlength="255"
-                        value="<?php echo $row["nom"] ?>" placeholder="NOUVEAU NOM" title="NOUVEAU NOM" />
+                    <input name="nom" class="element text medium" type="text" maxlength="255" value="<?php echo $row["nom"] ?>" placeholder="NOUVEAU NOM" title="NOUVEAU NOM" />
                 </th>
 
-                <th><input id="creditadd" name="CREDITADD" class="element text medium" type="text" maxlength="255"
-                        value="" placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" onchange="ifcredit()" /></th>
+                <th><input id="creditadd" name="CREDITADD" class="element text medium" type="text" maxlength="255" value="" placeholder="CREDIT A AJOUTER" title="CREDIT A AJOUTER" onchange="ifcredit()" /></th>
 
                 <th><?php echo "ID" ?></th>
             </tr>
         </tbody>
     </Table>
 
-    <input style="height:5%; font-size: 50%; display:" id="trchange2" class="btn btn-warning" type="button"
-        name="MODIFIER" value="MODIFIER" onClick="energiechange('trchange','trchange2')">
+    <input style="height:5%; font-size: 50%; display:" id="trchange2" class="btn btn-warning" type="button" name="MODIFIER" value="MODIFIER" onClick="energiechange('trchange','trchange2')">
 
     <br><br>
 
-    <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255"
-        value="<?php echo $id; ?>" />
-    <input style="display:none" id="creditin" name="CREDIT" class="element text medium" type="text" maxlength="255"
-        value="<?php echo $row["credit"]; ?>" />
+    <input style="display:none" id="element_6" name="ID" class="element text medium" type="text" maxlength="255" value="<?php echo $id; ?>" />
+    <input style="display:none" id="creditin" name="CREDIT" class="element text medium" type="text" maxlength="255" value="<?php echo $row["credit"]; ?>" />
     <input style="" id="creditbtn" class="btn btn-warning" name="<?php if (htmlspecialchars($_GET["addc"]) == "true") {
-echo 'ADDITEM';
-} else {
-echo 'MODIFIERITEM';
-} ?>" value="<?php if (htmlspecialchars($_GET["addc"]) == "true") {
-echo 'AJOUTER';
-} else {
-echo 'PAYER CONSOMATIONS';
-} ?>" type="submit">
+        echo 'ADDITEM';
+    } else {
+        echo 'MODIFIERITEM';
+    } ?>" value="<?php if (htmlspecialchars($_GET["addc"]) == "true") {
+        echo 'AJOUTER';
+    } else {
+        echo 'PAYER CONSOMATIONS';
+    } ?>" type="submit">
 
     <?php include "itemliste.php"; ?>
 
@@ -131,18 +125,18 @@ echo 'PAYER CONSOMATIONS';
             </th>
         </tr>
     </thead>
-    <?php    
-}
-}
-
-$sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
-//echo $sql;
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    ?>
     <?php
-    while ($row = mysqli_fetch_assoc($result)) {
+            }
+        }
+
+    $sql = "SELECT * FROM `logs` WHERE `action` LIKE \"%`id` = '" . $id . "'%\"";
+    //echo $sql;
+    $result = mysqli_query(dbconnect, $sql);
+    if (mysqli_num_rows($result) > 0) {
         ?>
+    <?php
+        while ($row = mysqli_fetch_assoc($result)) {
+            ?>
 
 
     <tbody>
@@ -156,12 +150,12 @@ if (mysqli_num_rows($result) > 0) {
     </tbody>
 
     <?php
-    }
-   ?>
+        }
+        ?>
 </Table><?php
-}
+    }
 ?>
-<?php  
+<?php
 }
 
 function getUpperPost($keepVar = true)
@@ -192,7 +186,7 @@ function modifinterventionupdate($AorM)
         PopUpMsg("INDIQUER AU MOINS UN NOM !");
         exit ;
     }
-    if (empty($_POST["CREDITADD"])){
+    if (empty($_POST["CREDITADD"])) {
         $_POST["CREDITADD"] = "0";
     }
     $creditadd = str_replace("'", "\'", $_POST["CREDITADD"]);
@@ -203,17 +197,17 @@ function modifinterventionupdate($AorM)
     $credit = $credit - $conso + $creditadd;
     echo  $credit . "\n";
     //$creditadd  = str_replace("'", "\'", $_POST["CREDITADD"]);
-echo $creditadd . "\n";
+    echo $creditadd . "\n";
     $detailsitems = str_replace("'", "\'", $_POST["detailsitems"]);
-echo $detailsitems . "\n";
+    echo $detailsitems . "\n";
 
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // dbconnect = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
     // Check connection
-    if (!$conn) {
-        $msg = "Connection failed: " . mysqli_connect_error();
-        die($msg);
-        PopUpMsg($msg);
-    }
+    // if (!dbconnect) {
+    //     $msg = "Connection failed: " . mysqli_connect_error();
+    //     die($msg);
+    //     PopUpMsg($msg);
+    // }
     if ($AorM == "MODIFIERITEM") {
         $sql = "UPDATE `clients` SET `nom` = '$nom',`credit`='$credit' WHERE `id` = '$id'";
         //echo $sql;
@@ -221,27 +215,27 @@ echo $detailsitems . "\n";
     // if ($AorM == "ADDITEM") {
     //     $sql = "INSERT INTO `clients`(`idgcm`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `coordgps`, `telephone`, `email`, `remarque`, `adressefacturation`,`etatrappel`, `infosclient`, `etatcontrat`, `datecontrat`, `marquechaudiere`, `modelchaudiere`, `numerochaudiere`, `marquebruleur`, `modelbruleur`, `numerobruleur`, `marqueregulation`, `modelregulation`, `numeroregulation`, `energie`, `prefiltre`, `emetteurs`) VALUES ('$idgcm','$nom','$prenom','$adresse','$cp','$ville','$coordgps','$telephone','$email','$remarque','$adressefacturation','$etatrappel','$infosclient','$etatcontrat','$datecontrat','$marquechaudiere','$modelchaudiere','$numerochaudiere','$marquebruleur','$modelbruleur','$numerobruleur',' $marqueregulation','$modelregulation','$numeroregulation','$energie','$prefiltre','$emetteur')";
     // }
-    if (mysqli_query($conn, $sql)) {
+    if (mysqli_query(dbconnect, $sql)) {
         if ($AorM == "ADDITEM") {
             PopUpMsg("AJOUT EFFECTUER.");
         } else {
             PopUpMsg("MODIFICATION EFFECTUER.");
         }
     } else {
-        PopUpMsg("Error: " . mysqli_error($conn));
+        PopUpMsg("Error: " . mysqli_error(dbconnect));
     }
     $sqlogs = 'INSERT INTO `logs` (`user`, `action`, `details`,`credit`, `ajout`, `conso`) VALUES ("' . $_SESSION["username"] . '","' . $sql . '","' . $detailsitems . '","' . $credit . '","' . $creditadd . '","' . $conso .'")';
     //echo '<br>';
     //echo $sqlogs;
-    $ww = mysqli_query($conn, $sqlogs);
-    mysqli_close($conn);
+    $ww = mysqli_query(dbconnect, $sqlogs);
+    // mysqli_close(dbconnect);
 
 
     // include "voirfunc.php";
     // loadintervention();
     ?>
 <script type="text/javascript">
-window.location.href = "liste.php?id=<?php echo $id; ?>";
+    window.location.href = "liste.php?id=<?php echo $id; ?>";
 </script>
 <?php
 }
