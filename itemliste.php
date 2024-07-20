@@ -1,16 +1,21 @@
 <?php
-
+//PAS D'ESPACE !!!!!
 $items = array(
 "Biere" => "2.50",
-"Soda" => "2.00",
-"Cafe" => "1.00",
-"Pates" => "5.00",
+"Soft" => "2.00",
+"Cafe_The" => "1.00",
+"Sandwich" => "4.00",
 "Crepe_Nutela" => "2.00",
-"Crepe_Sucrée" => "1.50",
-"Patisserie_2" => "2.00",
-"Patisserie_1" => "1.00",
-"Consigne" => "1.00"
+"Crepe_Sucree" => "1.50",
+"Sucrerie_Consigne" => "1.00"
 );
+
+//FORMAT --->>    "ITEMS_SANS_ESPACE" => "EURO.CENTIMES",
+
+
+
+
+///////PAS TOUCHE EN DESSOUS ///////
 
 $cumulitem;
 $first = true;
@@ -59,7 +64,7 @@ echo "}\n";
 echo "detailsitemtext = detailsitemtext.slice(0, -3);\n";
 
  echo "document.getElementById(\"nocredit2\").innerHTML = $cumulitem  + ' €';\n";
-
+ 
  echo "document.getElementById(\"conso\").value = $cumulitem;\n";
  echo "ifcredit()\n";
 echo "};\n";
@@ -80,6 +85,7 @@ echo "</script>\n";
 echo "<p style=\"display:none\" id=\"nocredit\">PAS ASSEZ DE CREDIT</p>\n";
 echo "<p style=\"display:\" id=\"nocredit1\">Total general: <a id=\"nocredit2\" name=\"total\" value=\"0\">0 €</a></p>\n";
 echo "<input style=\"display:none\" id=\"detailsitems\" name=\"detailsitems\" class=\"element text medium\" type=\"text\" maxlength=\"500\" value=\"0\" />\n";
+// echo "<input id=\"detailsitems\" name=\"detailsitems\" class=\"element text medium\" type=\"text\" maxlength=\"500\" value=\"0\" />\n";
 echo "<input style=\"display:none\" id=\"conso\" name=\"conso\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"0\" />\n";
 
 echo "<br>";
@@ -113,6 +119,7 @@ function ifcredit() {
     //     .value));
     // console.log(document.getElementById("conso").value);
     // console.log(document.getElementById("detailsitems").value = detailsitemtext);
+    document.getElementById("detailsitems").value = detailsitemtext
     var creditaddnozero = parseFloat(document.getElementById("creditadd").value);
     if (!creditaddnozero) {
         creditaddnozero = 0;
